@@ -6,7 +6,7 @@ import sys
 filename = 'brain_mri.jpg'
 
 try:
-    original_img = mpimg.imread(filename)
+    original_img = mping.imread(filename)
     if len(original_img) == 3
         original_img = np.dot(original_img[...,:3], [0.2989, 0.5870, 0.1140])
     
