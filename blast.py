@@ -68,11 +68,23 @@ def run_blast_automation(input_csv, output_csv):
     results_df.to_csv(output_csv, index=False, encoding='utf-8-sig')
     print(f"\n모든 작업 완료! 결과가 '{output_csv}'에 저장되었습니다.")
 
-import glob
+import argparse
 
 # --- 실행 ---
-# H1N1으로 시작하는 모든 CSV 파일 찾기
-for input_file in glob.glob('H1N1*.csv'):
-    output_file = input_file.replace('.csv', '_blast_results.csv')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run BLAST automation on a CSV file.")
+    parser.add_argument("input_csv", help="Path to the input CSV file containing sequence data.")
+    parser.add_argument("--output_csv", 
+                        help="Path to the output CSV file for BLAST results. Defaults to input_csv_blast_results.csv",
+                        default=None)
+
+    args = parser.parse_args()
+
+    input_file = args.input_csv
+    output_file = args.output_csv
+
+    if output_file is None:
+        output_file = input_file.replace('.csv', '_blast_results.csv')
+
     print(f"Processing {input_file} -> {output_file}")
     run_blast_automation(input_file, output_file)
