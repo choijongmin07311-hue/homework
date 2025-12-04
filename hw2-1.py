@@ -1,8 +1,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
-filename = '20251127.csv'
+# Check if a filename is provided as a command-line argument
+if len(sys.argv) > 1:
+    filename = sys.argv[1]
+else:
+    filename = '20251127.csv' # Default filename
 
 try:
     df = pd.read_csv(filename)
